@@ -1,0 +1,26 @@
+name = "aktmedia"
+main = "cloudflare/worker/src/index.ts"
+compatibility_date = "2026-10-01"
+
+[assets]
+directory = "./artifacts/akt-media/dist/public"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "akt-media-productions"
+database_id = "aa5f0e56-e7c6-4dae-bb5d-17157df2020a"
+
+[[r2_buckets]]
+binding = "MEDIA_BUCKET"
+bucket_name = "akt-media-productions"
+
+[vars]
+AUDIO_TOKEN_TTL_SECONDS = "600"
+# "preview" = visitors and free members only hear tagged previews of beats (upload MP3s to R2 under Previews/).
+# Use "open" ONLY as a temporary fallback while previews are being uploaded.
+BEAT_ACCESS = "preview"
+# "enforce" blocks anything outside the Content-Security-Policy. Set to "report-only" for an instant rollback if something breaks.
+CSP_MODE = "enforce"

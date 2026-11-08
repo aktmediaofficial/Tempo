@@ -1,0 +1,23 @@
+# Security headers for every page and file of the website (served by Cloudflare, no Worker needed).
+# To roll back a too-strict policy quickly: rename "Content-Security-Policy" to "Content-Security-Policy-Report-Only" on the two lines below and redeploy.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), usb=(), payment=(self), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; frame-src https://maps.google.com https://www.google.com; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests
+
+# The sample player still uses inline scripts and the Tailwind CDN, so it gets a looser script policy.
+# (Compile Tailwind and move the inline script to a file to remove 'unsafe-inline' here.)
+/sample.html
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; frame-src https://maps.google.com https://www.google.com; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests
+/sample
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; frame-src https://maps.google.com https://www.google.com; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests
+/sample/
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; frame-src https://maps.google.com https://www.google.com; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests

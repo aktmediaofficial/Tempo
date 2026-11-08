@@ -1,0 +1,2 @@
+Delete from the repo (GitHub: open the file > ... menu > Delete file):
+  .github/workflows/apply-fix.yml
